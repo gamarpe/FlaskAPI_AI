@@ -1,0 +1,18 @@
+.venv/
+.vscode/
+# Entornos virtuales (el aislamiento del que hablábamos)
+.venv/
+venv/
+ENV/
+
+# Archivos de caché de Python (evita miles de archivos basura)
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Base de datos local de desarrollo (¡NUNCA se sube al repositorio!)
+*.sqlite3
+
+# Configuraciones locales y secretos de VS Code
+.vscode/
+.env
