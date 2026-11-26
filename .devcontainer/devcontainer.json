@@ -1,6 +1,6 @@
 {
   "name": "Python Flask API para IA",
-  "image": "://microsoft.com",
+  "image":"://mcr.microsoft.com/devcontainers/python:3.11",
   "postCreateCommand": "python -m venv .venv && .venv/bin/pip install -r requirements.txt && echo 'source ${containerWorkspaceFolder}/.venv/bin/activate' >> ~/.bashrc",
   "customizations": {
     "vscode": {
