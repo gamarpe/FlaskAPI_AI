@@ -1,0 +1,15 @@
+{
+  "name": "Python Flask API para IA",
+  "image": "://microsoft.com",
+  "postCreateCommand": "python -m venv .venv && .venv/bin/pip install -r requirements.txt && echo 'source ${containerWorkspaceFolder}/.venv/bin/activate' >> ~/.bashrc",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python"
+      },
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  }
+}
