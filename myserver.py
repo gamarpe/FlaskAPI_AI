@@ -20,7 +20,7 @@ def home():
 def predict():
     review = request.form.get("review")
     if not review:
-        return "No hay reseña disponoble"
+        return "No hay reseña disponible"
     review_tfidf = vectorizer.transform([review])
     prediction = model.predict(review_tfidf)
     sentiment = "positive" if prediction[0] == 1 else "negative"
@@ -37,9 +37,15 @@ def api_predict():
     vector = vectorizer.transform([texto])
     prediccion = model.predict(vector)[0]
 
+    # Obtiene la probabilidad más alta entre negativo [0] y positivo [1]
+    probabilidades = model.predict_proba(vector)[0]
+    confianza = round(float(max(probabilidades)) * 100, 2)
+
     return jsonify({
         "review": texto,
-        "sentiment": str(prediccion)
+        "sentiment": "positive" if prediccion == 1 else "negative",
+        "confidence_percent": confianza
+        
     })
 
 
