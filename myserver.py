@@ -1,9 +1,11 @@
+import os
 from flask import Flask, render_template,request
 import joblib
 
 # 1. Carga el modelo y el vectorizador aquí (a nivel global)
-model = joblib.load("imdb_sentiment_model.pkl")
-vectorizer = joblib.load("imdb_vectorizer.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model = joblib.load(os.path.join(BASE_DIR,"imdb_sentiment_model.pkl"))
+vectorizer = joblib.load(os.path.join(BASE_DIR, "imdb_vectorizer.pkl"))
 
 app = Flask(__name__)
 
