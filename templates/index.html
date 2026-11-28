@@ -1,10 +1,26 @@
 <html>
     <body>
-        <h1>Reseña de la pelicula</h1>
-        <form action="/predict" method="post">
-            <label for="review"> Introduce la reseña ></label><br>
-            <textarea name="review" rows="10" cols="50"></textarea><br><br>
-            <input type="submit" value="Submit">
-        </form>
-    </body>
+    <h1>Reseña de la película</h1>
+    <form id="reviewForm">
+        <label for="review">Introduce la reseña:</label><br>
+        <textarea id="review" name="review" rows="10" cols="50"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const texto = document.getElementById("review").value;
+            const resp = await fetch("/api/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ review: texto })
+            });
+            const data = await resp.json();
+            document.getElementById("resultado").innerHTML = 
+                `La reseña es <b>${data.sentiment}</b> (Confianza: ${data.confidence_percent}%)`;
+        });
+    </script>
+</body>
 </html>

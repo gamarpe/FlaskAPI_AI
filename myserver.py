@@ -22,9 +22,11 @@ def predict():
     if not review:
         return "No hay reseña disponible"
     review_tfidf = vectorizer.transform([review])
-    prediction = model.predict(review_tfidf)
-    sentiment = "positive" if prediction[0] == 1 else "negative"
-    return f"La reseña es <b>{sentiment}</b>"
+    prediction = model.predict(review_tfidf)[0]
+    probabilidades = model.predict_proba(review_tfidf)[0]
+    confianza = round(float(max(probabilidades)) * 100, 2)
+    sentiment = "positiva" if prediction == 1 else "negativa"
+    return f"La reseña es <b>{sentiment}</b> (Confianza: {confianza}%)"
 
 
 @app.route("/api/predict", methods=["POST"])
@@ -43,9 +45,9 @@ def api_predict():
 
     return jsonify({
         "review": texto,
-        "sentiment": "positive" if prediccion == 1 else "negative",
+        "sentiment": "positiva" if prediccion == 1 else "negativa",
         "confidence_percent": confianza
-        
+
     })
 
 
